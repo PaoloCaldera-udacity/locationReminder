@@ -43,13 +43,14 @@ class AuthenticationActivity : AppCompatActivity() {
             AuthUI.IdpConfig.GoogleBuilder().build()
         )
 
-        //val customLayout = AuthMethodPickerLayout.Builder()
+        // Custom layout for authentication screen
+        val customLayout = AuthMethodPickerLayout.Builder(R.layout.login_layout).build()
 
         startActivityForResult(
             AuthUI.getInstance()
                 .createSignInIntentBuilder()
                 .setAvailableProviders(providers)
-                //.setAuthMethodPickerLayout()
+                .setAuthMethodPickerLayout(customLayout)
                 .build(),
             SIGN_IN_REQUEST_CODE
         )
