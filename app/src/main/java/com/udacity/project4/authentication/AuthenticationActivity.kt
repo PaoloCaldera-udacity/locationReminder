@@ -26,11 +26,9 @@ class AuthenticationActivity : AppCompatActivity() {
         binding = ActivityAuthenticationBinding.inflate(LayoutInflater.from(this))
         setContentView(binding.root)
 
+        supportActionBar?.title = getString(R.string.login)
 
-        // TODO: Implement the create account and sign in using FirebaseUI,
-        //  use sign in using email and sign in using Google
-
-        // TODO: If the user was authenticated, send him to RemindersActivity
+        binding.authenticationActivity = this@AuthenticationActivity
 
         // TODO: a bonus is to customize the sign in flow to look nice using :
         //https://github.com/firebase/FirebaseUI-Android/blob/master/auth/README.md#custom-layout
@@ -43,14 +41,15 @@ class AuthenticationActivity : AppCompatActivity() {
             AuthUI.IdpConfig.GoogleBuilder().build()
         )
 
-        // Custom layout for authentication screen
-        val customLayout = AuthMethodPickerLayout.Builder(R.layout.login_layout).build()
+        // TODO: provide a custom layout for authentication screen
+        //val customLayout = AuthMethodPickerLayout.Builder(R.layout.login_layout).build()
 
         startActivityForResult(
             AuthUI.getInstance()
                 .createSignInIntentBuilder()
                 .setAvailableProviders(providers)
-                .setAuthMethodPickerLayout(customLayout)
+                .setTheme(R.style.AppTheme)
+                //.setAuthMethodPickerLayout(customLayout)
                 .build(),
             SIGN_IN_REQUEST_CODE
         )
